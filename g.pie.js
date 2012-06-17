@@ -261,9 +261,10 @@
     				chart.labels[i].push(txt = paper.text(x + 20, h, labels[j] || values[j]).attr(chartinst.txtattr).attr({ fill: opts.legendcolor || "#000", "text-anchor": "start","font-size" : 0}));
 				}
                 else{
-                    chart.labels[i].push(paper[mark](x + 5, h, 5).attr({ fill: clr, stroke: "none" }));
-                    chart.labels[i].push(txt = paper.text(x + 20, h, labels[j] || values[j]).attr(chartinst.txtattr).attr({ fill: opts.legendcolor || "#000", "text-anchor": "start"}));
-                }
+                    //reduced the area between the legend and the little circles
+                    chart.labels[i].push(paper[mark](x - 7, h, 5).attr({ fill: clr, stroke: "none" }));
+		    chart.labels[i].push(txt = paper.text(x + 3, h, labels[j] || values[j]).attr(chartinst.txtattr).attr({ fill: opts.legendcolor || "#000", "text-anchor": "start"}));
+		}
                 covers[i].label = chart.labels[i];
                 h += txt.getBBox().height * 1.2;
             }
