@@ -91,6 +91,7 @@
 
                 var p, path = sector(cx, cy, r, angle, angle -= 360 * values[i] / total);
                 
+                //edits below taken from https://github.com/blackwatertepes/g.raphael/commit/93d9728732dfd417e609809b8df67f8e2645bc93
                 if (values[i].value < total) {
                     var strokewidth = 0;
                     //If sector value < 0, remove stroke to hide sector
