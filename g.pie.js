@@ -22,6 +22,9 @@
             cut = 9,
             defcut = true;
 
+        //taken from https://github.com/gorillatron/g.raphael/commit/9627e1ff8bb3f9ebfa14efe70ddc0d3d481d9285
+        if(typeof opts.defcut != 'undefined') defcut = opts.defcut;
+
         function sector(cx, cy, r, startAngle, endAngle, fill) {
             var rad = Math.PI / 180,
                 x1 = cx + r * Math.cos(-startAngle * rad),
@@ -92,16 +95,17 @@
                 var p, path = sector(cx, cy, r, angle, angle -= 360 * values[i] / total);
                 
                 //edits below taken from https://github.com/blackwatertepes/g.raphael/commit/93d9728732dfd417e609809b8df67f8e2645bc93
+                //and from https://github.com/gorillatron/g.raphael/commit/9627e1ff8bb3f9ebfa14efe70ddc0d3d481d9285
                 if (values[i].value < total) {
                     var strokewidth = 0;
                     //If sector value < 0, remove stroke to hide sector
                     if (values[i].value > 0) {
                         strokewidth = (opts.strokewidth == null ? 1 : opts.strokewidth);
                     }
-                    p = paper.path(opts.init ? ipath : path).attr({ fill: opts.colors && opts.colors[i] || chartinst.colors[i] || "#666", stroke: opts.stroke || "#fff", "stroke-width": strokewidth, "stroke-linejoin": "round" });
+                    p = paper.path(opts.init ? ipath : path).attr({ fill: opts.colors && opts.colors[values[i].order] || chartinst.colors[i] || "#666", stroke: opts.stroke || "#fff", "stroke-width": strokewidth, "stroke-linejoin": "round" });
                 } else {
                     //If the sector value >= total, render circle, not path
-                    p = paper.circle(cx, cy, r).attr({ fill: chartinst.colors[0], stroke: opts.stroke || "#fff", "stroke-width": opts.strokewidth == null ? 1 : opts.strokewidth })
+                    p = paper.circle(cx, cy, r).attr({ fill: opts.colors && opts.colors[values[i].order] || chartinst.colors[0], stroke: opts.stroke || "#fff", "stroke-width": opts.strokewidth == null ? 1 : opts.strokewidth })
                 }
               
               
