@@ -92,14 +92,14 @@
                 var p, path = sector(cx, cy, r, angle, angle -= 360 * values[i] / total);
                 
                 if (values[i].value < total) {
-                    //If the sector value >= total, render circle, not path
                     var strokewidth = 0;
+                    //If sector value < 0, remove stroke to hide sector
                     if (values[i].value > 0) {
-                        //If sector value < 0, remove stroke to hide sector
                         strokewidth = (opts.strokewidth == null ? 1 : opts.strokewidth);
                     }
                     p = paper.path(opts.init ? ipath : path).attr({ fill: opts.colors && opts.colors[i] || chartinst.colors[i] || "#666", stroke: opts.stroke || "#fff", "stroke-width": strokewidth, "stroke-linejoin": "round" });
                 } else {
+                    //If the sector value >= total, render circle, not path
                     p = paper.circle(cx, cy, r).attr({ fill: chartinst.colors[0], stroke: opts.stroke || "#fff", "stroke-width": opts.strokewidth == null ? 1 : opts.strokewidth })
                 }
               
