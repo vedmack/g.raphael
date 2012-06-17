@@ -258,8 +258,8 @@
                 //is not enough place to display the legend
                 if(opts.show_legend === false){
                     chart.labels[i].push(paper[mark](x + 5, h, 5).attr({ fill: clr, stroke: "none" ,r:0}));
-    				chart.labels[i].push(txt = paper.text(x + 20, h, labels[j] || values[j]).attr(chartinst.txtattr).attr({ fill: opts.legendcolor || "#000", "text-anchor": "start","font-size" : 0}));
-				}
+    	            chart.labels[i].push(txt = paper.text(x + 20, h, labels[j] || values[j]).attr(chartinst.txtattr).attr({ fill: opts.legendcolor || "#000", "text-anchor": "start","font-size" : 0}));
+		}
                 else{
                     //reduced the area between the legend and the little circles
                     chart.labels[i].push(paper[mark](x - 7, h, 5).attr({ fill: clr, stroke: "none" }));
