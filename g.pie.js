@@ -104,24 +104,43 @@
                         strokewidth = (opts.strokewidth == null ? 1 : opts.strokewidth);
                     }
                     p = paper.path(opts.init ? ipath : path).attr({ fill: opts.colors && opts.colors[values[i].order] || chartinst.colors[i] || "#666", stroke: opts.stroke || "#fff", "stroke-width": strokewidth, "stroke-linejoin": "round" });
+                   
+                    p.value = values[i];
+                    p.middle = path.middle;
+                    p.mangle = mangle;
+                    sectors.push(p);
+                    series.push(p);
+                    opts.init && p.animate({ path: path.join(",") }, (+opts.init - 1) || 1000, ">");
+                    
                 } else {
                     //If the sector value >= total, render circle, not path
                     p = paper.circle(cx, cy, r).attr({ fill: opts.colors && opts.colors[values[i].order] || chartinst.colors[0], stroke: opts.stroke || "#fff", "stroke-width": opts.strokewidth == null ? 1 : opts.strokewidth })
+                    
+                    //based on if (len == 1) { from line 49 I applied the same here - creating the p2 that later on will
+                    //be pushed into covers
+                    
+                    p2 = paper.circle(cx, cy, r).attr(chartinst.shim);
+                    
+                    p.customP2 = p2;
+                    p.value = values[i];
+                    p.middle = {x: cx, y: cy};
+                    p.mangle = 180;
+                    sectors.push(p);
+                    series.push(p);
+                    opts.init && p.animate({ path: path.join(",") }, (+opts.init - 1) || 1000, ">");
                 }
-              
-              
-                p.value = values[i];
-                p.middle = path.middle;
-                p.mangle = mangle;
-                sectors.push(p);
-                series.push(p);
-                opts.init && p.animate({ path: path.join(",") }, (+opts.init - 1) || 1000, ">");
             }
 
             for (i = 0; i < len; i++) {
-                p = paper.path(sectors[i].attr("path")).attr(chartinst.shim);
-                opts.href && opts.href[i] && p.attr({ href: opts.href[i] });
+            	if(sectors[i].customP2 === undefined){
+                	p = paper.path(sectors[i].attr("path")).attr(chartinst.shim);
+            	}
+            	else{
+            		p = sectors[i].customP2;
+            	}
+                
                 p.attr = function () {};
+		opts.href && opts.href[i] && p.attr({ href: opts.href[i] });
                 covers.push(p);
                 series.push(p);
             }
