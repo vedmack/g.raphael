@@ -138,9 +138,8 @@
             	else{
             		p = sectors[i].customP2;
             	}
-                
-                p.attr = function () {};
 		opts.href && opts.href[i] && p.attr({ href: opts.href[i] });
+		p.attr = function () {};
                 covers.push(p);
                 series.push(p);
             }
