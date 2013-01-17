@@ -16,6 +16,7 @@
             series = paper.set(),
             order = [],
             len = values.length,
+            //taken from https://github.com/cederlof/g.raphael/commit/f532cd5d4233f8a4c02d07adcd39da1e5de81198
             angle = opts.startFromFixedAngle || 0,
             total = 0,
             others = 0,
