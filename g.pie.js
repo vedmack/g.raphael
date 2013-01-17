@@ -83,7 +83,7 @@
 
             for (i = 0; i < len; i++) {
                 var mangle = angle - 360 * values[i] / total / 2;
-		mangle = mangle + 70;
+		
                 if (!i) {
                     angle = 90 - mangle;
                     mangle = angle - 360 * values[i] / total / 2;
