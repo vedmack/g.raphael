@@ -16,7 +16,7 @@
             series = paper.set(),
             order = [],
             len = values.length,
-            opts.startFromFixedAngle || 0,
+            angle = opts.startFromFixedAngle || 0,
             total = 0,
             others = 0,
             cut = 9,
